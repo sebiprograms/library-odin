@@ -1,0 +1,22 @@
+body {
+  display: flex;
+}
+
+.sidemenu {
+  height: 100vh;
+  width: 300px;
+
+}
+
+.card {
+  width: 300px;
+  height: 260px;
+  border-style: solid;
+  border-color: bisque;
+  padding: 5px;
+}
+
+.card>button {
+  width: 40px;
+  height: 20px;
+}
