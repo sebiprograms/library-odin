@@ -1,4 +1,5 @@
-const submitbut = document.querySelector(".formbutton")
+const statusbutton = document.querySelector(".status")
+const deletebutton = document.querySelector(".delete")
 const form = document.querySelector("form")
 const formData = new FormData(form)
 
@@ -33,7 +34,7 @@ form.addEventListener("submit", (e) => {
   const title = formData.get("title")
   const author = formData.get("author")
   const pgs = formData.get("pages")
-  const status = formData.get("status") 
+  let status = formData.get("status") 
 
   // Create object for book and push it too Books array
   addBookToLibrary(title, author, pgs, status)
@@ -50,8 +51,15 @@ form.addEventListener("submit", (e) => {
   if (status == "read") {
     statustext.textContent = `Status: ${status}`
   } else if (status == null){
-    statustext.textContent = `Status:`
+    status = "unread"
+    statustext.textContent = `Status: ${status}`
   }
+  const statusbutton = document.createElement("button")
+  const deletebutton = document.createElement("button")
+  statusbutton.textContent = "status"
+  deletebutton.textContent = "delete"
+  statusbutton.classList.add("status")
+  deletebutton.classList.add("delete")
   // Add classes for style
   cardElement.classList.add("card")
   titleElement.classList.add("title")
@@ -62,5 +70,20 @@ form.addEventListener("submit", (e) => {
   cardElement.appendChild(authorElement)
   cardElement.appendChild(pagesElement)
   cardElement.appendChild(statustext)
+  cardElement.appendChild(statusbutton)
+  cardElement.appendChild(deletebutton)
   showcase.appendChild(cardElement)
+  // add status and delete buttons and also update object values to delete
+  // from array or change status value in object on button click, then should
+  // be done!
 })
+
+// only updates on first click
+statusbutton.addEventListener(onclick, () => {
+  if (statustext.textContent == "read"){
+    statustext.textContent = "unread"
+  } else if (statustext.textContent == "unread") {
+    statustext.textContent = "read"
+  }
+})
+
