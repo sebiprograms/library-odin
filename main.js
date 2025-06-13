@@ -19,8 +19,8 @@ function Book(title, author, pgs, readstat) {
 
 books = []
 
-function addBookToLibrary(title, author, pgs, readstat) {
-  book = new Book(title, author, pgs, readstat)
+function addBookToLibrary(title, author, pgs, status) {
+  book = new Book(title, author, pgs, status)
   books.push(book)
 }
 
@@ -33,26 +33,34 @@ form.addEventListener("submit", (e) => {
   const title = formData.get("title")
   const author = formData.get("author")
   const pgs = formData.get("pages")
-  const readstat = formData.get("status") 
+  const status = formData.get("status") 
 
-  addBookToLibrary(title, author, pgs, readstat)
+  // Create object for book and push it too Books array
+  addBookToLibrary(title, author, pgs, status)
  
   // Add text content to new card elements
   const cardElement = document.createElement("div") 
   const titleElement = document.createElement("h2")
-  titleElement.textContent = title
+  titleElement.textContent = `Title: ${title}`
   const authorElement = document.createElement("h2")
-  authorElement.textContent = author
+  authorElement.textContent = `Author: ${author}`
   const pagesElement = document.createElement("p")
-  pagesElement.textContent = pgs
-
+  pagesElement.textContent = `Pages: ${pgs}`
+  const statustext = document.createElement("p")
+  if (status == "read") {
+    statustext.textContent = `Status: ${status}`
+  } else if (status == null){
+    statustext.textContent = `Status:`
+  }
   // Add classes for style
   cardElement.classList.add("card")
   titleElement.classList.add("title")
   authorElement.classList.add("author")
   pagesElement.classList.add("pages")
+  statustext.classList.add("statustext")
   cardElement.appendChild(titleElement)
   cardElement.appendChild(authorElement)
   cardElement.appendChild(pagesElement)
+  cardElement.appendChild(statustext)
   showcase.appendChild(cardElement)
 })
