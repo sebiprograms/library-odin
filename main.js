@@ -56,17 +56,21 @@ form.addEventListener("submit", (e) => {
   const statusbutton = document.createElement("button")
   const deletebutton = document.createElement("button")
   statusbutton.addEventListener('click', () => {
-    console.log(statustext.textContent)
     if (status == "read"){
       status = "unread"
+      console.log(status)
       statustext.textContent = `Status: ${status}`
       statustext.replaceWith(statustext)
 
     } else if (status == "unread") {
       status = "read"
+      console.log(status)
       statustext.textContent = `Status: ${status}`
       statustext.replaceWith(statustext)
     } 
+  })
+  deletebutton.addEventListener('click', () => {
+    cardElement.remove()
   })
   statusbutton.textContent = "status"
   deletebutton.textContent = "delete"
