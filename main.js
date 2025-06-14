@@ -1,5 +1,3 @@
-const statusbutton = document.querySelector(".status")
-const deletebutton = document.querySelector(".delete")
 const form = document.querySelector("form")
 const formData = new FormData(form)
 
@@ -36,6 +34,7 @@ form.addEventListener("submit", (e) => {
   const pgs = formData.get("pages")
   let status = formData.get("status") 
 
+
   // Create object for book and push it too Books array
   addBookToLibrary(title, author, pgs, status)
  
@@ -51,15 +50,29 @@ form.addEventListener("submit", (e) => {
   if (status == "read") {
     statustext.textContent = `Status: ${status}`
   } else if (status == null){
-    status = "unread"
+    status = "read"
     statustext.textContent = `Status: ${status}`
   }
   const statusbutton = document.createElement("button")
   const deletebutton = document.createElement("button")
+  statusbutton.addEventListener('click', () => {
+    console.log(statustext.textContent)
+    if (status == "read"){
+      status = "unread"
+      statustext.textContent = `Status: ${status}`
+      statustext.replaceWith(statustext)
+
+    } else if (status == "unread") {
+      status = "read"
+      statustext.textContent = `Status: ${status}`
+      statustext.replaceWith(statustext)
+    } 
+  })
   statusbutton.textContent = "status"
   deletebutton.textContent = "delete"
-  statusbutton.classList.add("status")
-  deletebutton.classList.add("delete")
+  statusbutton.classList.add("statusbtn")
+  deletebutton.classList.add("deletebtn")
+
   // Add classes for style
   cardElement.classList.add("card")
   titleElement.classList.add("title")
@@ -73,17 +86,11 @@ form.addEventListener("submit", (e) => {
   cardElement.appendChild(statusbutton)
   cardElement.appendChild(deletebutton)
   showcase.appendChild(cardElement)
+
   // add status and delete buttons and also update object values to delete
   // from array or change status value in object on button click, then should
   // be done!
 })
 
-// only updates on first click
-statusbutton.addEventListener(onclick, () => {
-  if (statustext.textContent == "read"){
-    statustext.textContent = "unread"
-  } else if (statustext.textContent == "unread") {
-    statustext.textContent = "read"
-  }
-})
+
 
